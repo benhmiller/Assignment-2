@@ -1,0 +1,2 @@
+.separator |
+.import Parser/items-0_Item.dat Item
