@@ -1,13 +1,13 @@
 .separator |
-.import Parser/items-0_Item.dat Item
+.import Items.dat Item
 UPDATE Item
 SET Buy_Price = NULL
 WHERE Buy_Price = 'None';
 
-.import Parser/items-0_Seller.dat Seller
+.import Sellers.dat Seller
 
-.import Parser/items-0_Bid.dat Bid
+.import Bids.dat Bid
 
-.import Parser/items-0_Bidder.dat Bidder
+.import Bidders.dat Bidder
 UPDATE Bidder SET Location = NULL WHERE Location = 'None';
 UPDATE Bidder SET Country = NULL WHERE Country = 'None';
