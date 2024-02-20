@@ -29,5 +29,5 @@ sqlite3 AuctionBase.db < load.txt
 # Clean directory of .dat files
 rm *.dat
 
-# Clean directory of temporary .dat files (excludes those above)
-# make clean
+# Run SQL Query Files
+sqlite3 AuctionBase.db < query1.sql
