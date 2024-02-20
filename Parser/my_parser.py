@@ -70,7 +70,8 @@ def transformDollar(money):
     return sub(r'[^\d.]', '', money)
 
 """
-Recursively traverse an object to: escape quotations of string object and cast to int
+Recursively traverse an object to escape quotations of string objects. Avoids casting integer values. Note, transformToDate function modified
+to account for the possible existence of double quotations introduced by this function.
 """
 def format_value(val):
     if isinstance(val, str):
@@ -107,11 +108,12 @@ def parseJson(json_file):
         items = loads(f.read())['Items'] # creates a Python dictionary of Items for the supplied json file
 
         for item in items:
-            # Format strings to escaped quotation format
+            # Merge category list to a single string of comma-delimited items
             item['Category'] = ", ".join(item['Category'])
-            print(item['Category'])
+            
+            # Format strings to escaped quotation format
             item = format_value(item)
-            print(item['Category'])
+            
             ## This employs the schema of Item.
             
             currentItem = {
