@@ -22,7 +22,7 @@ CREATE TABLE Item (
 );
 
 CREATE TABLE Seller (
-    UserID INTEGER PRIMARY KEY,
+    UserID TEXT PRIMARY KEY,
     Rating INTEGER
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE Bid (
 );
 
 CREATE TABLE Bidder (
-    UserID INTEGER PRIMARY KEY,
+    UserID TEXT PRIMARY KEY,
     Rating INTEGER,
     Location TEXT,
     Country TEXT

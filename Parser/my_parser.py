@@ -124,7 +124,8 @@ def parseJson(json_file):
                 "First_Bid": transformDollar(item['First_Bid']), 
                 "Currently": transformDollar(item['Currently']), 
                 "Number_of_Bids": item['Number_of_Bids'], 
-                "Buy_Price": None, "Location": item['Location'], 
+                "Buy_Price": None,
+                "Location": item['Location'], 
                 "Country": item['Country'], 
                 "Started": transformDttm(item['Started']), 
                 "Ends": transformDttm(item['Ends']), 
@@ -145,9 +146,19 @@ def parseJson(json_file):
             if(item['Bids'] != None):
                 for bid in item['Bids']:
                     ## This employs the schema of Bid.
-                    currentBid = {"ItemID": item['ItemID'], "Time": transformDttm(bid['Bid']['Time']), "Amount": transformDollar(bid['Bid']['Amount']), "BidderID": bid['Bid']['Bidder']['UserID']}
+                    currentBid = {
+                        "ItemID": item['ItemID'], 
+                        "Time": transformDttm(bid['Bid']['Time']), 
+                        "Amount": transformDollar(bid['Bid']['Amount']), 
+                        "BidderID": bid['Bid']['Bidder']['UserID']
+                    }
                     ## This employs the schema of Bidder.
-                    currentBidder = {"UserID": bid['Bid']['Bidder']['UserID'], "Rating": bid['Bid']['Bidder']['Rating'], "Location": None, "Country": None}
+                    currentBidder = {
+                        "UserID": bid['Bid']['Bidder']['UserID'], 
+                        "Rating": bid['Bid']['Bidder']['Rating'], 
+                        "Location": None, 
+                        "Country": None
+                    }
                     if "Location" in bid['Bid']['Bidder']:
                         bid['Bid']['Bidder']['Location']
                     if "Country" in bid['Bid']['Bidder']:
