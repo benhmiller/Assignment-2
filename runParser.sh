@@ -20,5 +20,14 @@ cat items-*_Bidder.dat > Bidders.dat
 sort Bidders.dat | uniq > Bidders_Temp.dat
 mv Bidders_Temp.dat Bidders.dat
 
-# Clean directory of temporary .dat files (excludes those created above)
-make clean
+# Create Database
+sqlite3 AuctionBase.db < create.sql
+
+# Populate Database
+sqlite3 AuctionBase.db < load.txt
+
+# Clean directory of .dat files
+rm *.dat
+
+# Clean directory of temporary .dat files (excludes those above)
+# make clean
