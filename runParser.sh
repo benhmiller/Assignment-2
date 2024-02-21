@@ -43,7 +43,7 @@ rm *.dat
 sqlite3 AuctionBase.db < query1.sql
 sqlite3 AuctionBase.db < query2.sql
 sqlite3 AuctionBase.db < query3.sql
-#sqlite3 AuctionBase.db < query4.sql
-#sqlite3 AuctionBase.db < query5.sql
-#sqlite3 AuctionBase.db < query6.sql
+sqlite3 AuctionBase.db < query4.sql
+sqlite3 AuctionBase.db < query5.sql
+sqlite3 AuctionBase.db < query6.sql
 sqlite3 AuctionBase.db < query7.sql
