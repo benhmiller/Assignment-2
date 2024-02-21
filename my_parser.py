@@ -109,7 +109,8 @@ def parseJson(json_file):
 
         for item in items:
             # Merge category list to a single string of comma-delimited items
-            item['Category'] = ", ".join(item['Category'])
+            item['Category'] = set(item['Category']) # Eliminate possible duplicate categories
+            item['Category'] = "#".join(item['Category'])
             
             # Format strings to escaped quotation format
             item = format_value(item)
