@@ -11,3 +11,5 @@ WHERE Buy_Price = 'None';
 .import Bidders.dat Bidder
 UPDATE Bidder SET Location = NULL WHERE Location = 'None';
 UPDATE Bidder SET Country = NULL WHERE Country = 'None';
+
+.import Categories.dat Category

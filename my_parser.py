@@ -95,7 +95,7 @@ of the necessary SQL tables for your database.
 """
 def parseJson(json_file):
 
-    schema = {"Items": [], "Sellers": [], "Bids": [], "Bidders": []}
+    schema = {"Items": [], "Sellers": [], "Bids": [], "Bidders": [], "Categories": []}
 
     with open(json_file, 'r') as f:
         ## Open file for writing
@@ -108,15 +108,24 @@ def parseJson(json_file):
         items = loads(f.read())['Items'] # creates a Python dictionary of Items for the supplied json file
 
         for item in items:
-            # Merge category list to a single string of comma-delimited items
             item['Category'] = set(item['Category']) # Eliminate possible duplicate categories
-            item['Category'] = "#".join(item['Category'])
             
-            # Format strings to escaped quotation format
+            ## This employs the schema of Category
+            currentCategories = []
+            for category in item['Category']:
+                category_element = {
+                    "ItemID": int(item['ItemID']),
+                    "Category": format_value(category)
+                }
+                currentCategories.append(category_element)
+
+            # Merge category list to a single string of comma-delimited items
+            item['Category'] = "#".join(item['Category'])
+
+            # Escape quotations in all item elements
             item = format_value(item)
             
             ## This employs the schema of Item.
-            
             currentItem = {
                 "ItemID": item['ItemID'], 
                 "SellerID": item['Seller']['UserID'], 
@@ -142,6 +151,8 @@ def parseJson(json_file):
                 schema['Items'].append(currentItem)
             if (schema['Sellers'].count(currentSeller) == 0):
                 schema['Sellers'].append(currentSeller)
+            #if (schema["Categories"].count(currentCategories) == 0):
+            schema["Categories"].append(currentCategories)
 
 
             if(item['Bids'] != None):
@@ -177,9 +188,9 @@ def parseJson(json_file):
         Seller_output = open(filename + "_Seller.dat", "w")
         Bid_output = open(filename + "_Bid.dat", "w")
         Bidder_output = open(filename + "_Bidder.dat", "w")
-        outputs = [Item_output, Seller_output, Bid_output, Bidder_output]
+        Category_output = open(filename + "_Category.dat", "w")
+        outputs = [Item_output, Seller_output, Bid_output, Bidder_output, Category_output]
         printSchema(schema, outputs)
-
     return
 
 def printSchema(schema, outputs):
@@ -223,6 +234,12 @@ def printSchema(schema, outputs):
         outputs[3].write(str(bidder['Rating']) + columnSeparator)
         outputs[3].write(str(bidder['Location']) + columnSeparator)
         outputs[3].write(str(bidder['Country']) + "\n")
+
+    #outputs[4] corresponds to _Category.dat
+    for categories in schema['Categories']:
+        for category in categories:
+            outputs[4].write(str(category['ItemID']) + columnSeparator)
+            outputs[4].write(str(category['Category']) + "\n")
 
     return
 

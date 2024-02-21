@@ -20,6 +20,11 @@ cat items-*_Bidder.dat > Bidders.dat
 sort Bidders.dat | uniq > Bidders_Temp.dat
 mv Bidders_Temp.dat Bidders.dat
 
+# Concatenate all Category.dat files into one file, then remove duplicates
+cat items-*_Category.dat > Categories.dat
+sort Categories.dat | uniq > Categories_Temp.dat
+mv Categories_Temp.dat Categories.dat
+
 # Create Database
 sqlite3 AuctionBase.db < create.sql
 
@@ -27,11 +32,18 @@ sqlite3 AuctionBase.db < create.sql
 sqlite3 AuctionBase.db < load.txt
 
 # Clean directory of .dat files
-rm *.dat
-#rm items-*_Item.dat
-#rm items-*_Seller.dat
-#rm items-*_Bid.dat
-#rm items-*_Bidder.dat
+#rm *.dat
+rm items-*_Item.dat
+rm items-*_Seller.dat
+rm items-*_Bid.dat
+rm items-*_Bidder.dat
+rm items-*_Category.dat
 
 # Run SQL Query Files
 sqlite3 AuctionBase.db < query1.sql
+sqlite3 AuctionBase.db < query2.sql
+sqlite3 AuctionBase.db < query3.sql
+#sqlite3 AuctionBase.db < query4.sql
+#sqlite3 AuctionBase.db < query5.sql
+#sqlite3 AuctionBase.db < query6.sql
+sqlite3 AuctionBase.db < query7.sql

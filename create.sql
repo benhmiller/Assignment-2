@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS Item;
 DROP TABLE IF EXISTS Seller;
 DROP TABLE IF EXISTS Bid;
 DROP TABLE IF EXISTS Bidder;
+DROP TABLE IF EXISTS Category;
 
 CREATE TABLE Item (
     ItemID INTEGER PRIMARY KEY,
@@ -41,4 +42,10 @@ CREATE TABLE Bidder (
     Rating INTEGER,
     Location TEXT,
     Country TEXT
+);
+
+CREATE TABLE Category (
+    ItemID TEXT,
+    Category Text,
+    PRIMARY KEY(ItemID, Category)
 );

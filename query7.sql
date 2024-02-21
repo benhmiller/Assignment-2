@@ -1,0 +1,4 @@
+SELECT COUNT(DISTINCT C.Category)
+FROM Category C
+JOIN Bid B ON C.ItemID = B.ItemID
+WHERE B.Amount > 100;
